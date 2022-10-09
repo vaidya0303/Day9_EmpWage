@@ -1,27 +1,28 @@
 public class Day9EmpWage {
-    public static void calculateTotalWage() {
+
+    // create calculatetotalwage method and pass parameters
+    public static void calculateTotalWage(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
+    {
         //constant
         final int PART_TIME = 1;
         final int FULL_TIME = 2;
-        final int WAGE_PER_HR = 20;
-        final int MAX_WORKING_DAYS = 20;
-        final int MAX_WORKING_HRS = 100;
-
         int totalWage = 0;
         int workingHrs = 0;
+
+        System.out.println("Details of " + companyName + " employee");
+        System.out.println("-----------------------------------------------------");
+        System.err.println("Wage per hour:" + wagePerHr);
+        System.out.println("Maximum working days:" + maxWorkingDays);
+        System.out.println("Maximum working hours:" + maxWorkingHrs);
         System.out.printf("%5s     %5s     %5s     %5s\n", "Day", "Workinghrs", "Wage", "Total working hrs");
+
         /*
-        using for loop check condition and print days ,workinghrs, wage ,totaal working hrs in month.
+        using for loop check the condition and print the total wage for both companies employee
          */
-        for (int day = 1, totalWorkingHrs = 0; day <= MAX_WORKING_DAYS
-                && totalWorkingHrs < MAX_WORKING_HRS; day++, totalWorkingHrs += workingHrs)
+        for (int day = 1, totalWorkingHrs = 0; day <= maxWorkingDays
+                && totalWorkingHrs <= maxWorkingHrs; day++, totalWorkingHrs += workingHrs)
         {
-
             int empType = (int) (Math.random() * 100) % 3;
-
-            /*
-            using switch case
-             */
             switch (empType)
             {
                 case FULL_TIME:
@@ -34,17 +35,17 @@ public class Day9EmpWage {
                     workingHrs = 0;
                     break;
             }
-            //calculate daily wage
-            int wage = workingHrs * WAGE_PER_HR;
-            totalWage += wage;// monthly wage
+
+            // calculate daily empwage
+            int wage = workingHrs * wagePerHr;
+            totalWage += wage; //monthly wage
             System.out.printf("%5d       %5d      %5d      %5d\n", day, workingHrs, wage, totalWorkingHrs + workingHrs);
-
         }
-        System.out.println("Total wage for a month is " + totalWage);
+        System.out.println("Total wage for a month of " + companyName + " employee is " + totalWage + "\n");
     }
-
     public static void main(String args[])
     {
-        calculateTotalWage();
+        calculateTotalWage("Amazon", 40, 15, 200);
+        calculateTotalWage("BigBazar", 20, 20, 100);
     }
 }
